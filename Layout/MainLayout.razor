@@ -1,0 +1,38 @@
+﻿@inherits LayoutComponentBase
+@inject IJSRuntime JS
+<div class="page">
+    <header class="mobile-header d-md-none">
+        <a class="brand" href="">Connor's Blog</a>
+        <button class="btn btn-sm btn-outline-light menu-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#blogSidebar" aria-expanded="false" aria-controls="blogSidebar" aria-label="Toggle posts menu">
+            <span class="bi bi-list" aria-hidden="true"></span>
+        </button>
+    </header>
+
+    <aside id="blogSidebar" class="sidebar collapse d-md-block">
+        <div class="sidebar-brand d-none d-md-flex">
+            <a href="">Connor's Blog</a>
+        </div>
+        <NavMenu PostSelected="HandlePostSelected" />
+    </aside>
+
+    <main class="main-content">
+        <article class="content-wrap">
+            @Body
+        </article>
+    </main>
+    </div>
+
+@code {
+    private async Task HandlePostSelected()
+    {
+        await JS.InvokeVoidAsync("blogSidebar.hideIfMobile", "blogSidebar", 640);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+            return;
+
+        await JS.InvokeVoidAsync("blogSidebar.enableOutsideClose", "blogSidebar", 640);
+    }
+}

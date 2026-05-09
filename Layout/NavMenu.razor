@@ -1,0 +1,85 @@
+﻿@inject BlogRepository BlogRepository
+
+<section class="menu-shell">
+    <p class="menu-kicker mb-1">Posts</p>
+    <!-- <h2 class="menu-title">All </h2> -->
+
+    @if (isLoading)
+    {
+        <p class="text-light-emphasis mb-0">Loading posts...</p>
+    }
+    else
+    {
+    <Accordion AlwaysOpen="true" Flush="true" Class="archive-accordion">
+        @foreach (var yearGroup in groupedPosts)
+        {
+            <AccordionItem Title="@yearGroup.Key.ToString()" Active="true">
+                <Content>
+                    <Accordion AlwaysOpen="true" Flush="true" Class="archive-accordion nested-months">
+                        @foreach (var monthGroup in yearGroup.Value)
+                        {
+                            <AccordionItem Title="@monthGroup.Key" Active="true">
+                                <Content>
+                                    @foreach (var dayGroup in monthGroup.Value)
+                                    {
+                                        <section class="day-group">
+                                            <p class="day-label mb-1">@dayGroup.Key</p>
+                                            <ul class="post-list">
+                                                @foreach (var post in dayGroup.Value)
+                                                {
+                                                    <li>
+                                                        <NavLink href="@post.RoutePath" class="post-link" Match="NavLinkMatch.All" @onclick="HandlePostSelected">
+                                                            @post.Title
+                                                        </NavLink>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </section>
+                                    }
+                                </Content>
+                            </AccordionItem>
+                        }
+                    </Accordion>
+                </Content>
+            </AccordionItem>
+        }
+    </Accordion>
+    }
+</section>
+
+@code {
+    [Parameter] public EventCallback PostSelected { get; set; }
+
+    private bool isLoading = true;
+
+    private Dictionary<int, Dictionary<string, Dictionary<int, List<BlogPost>>>> groupedPosts = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var posts = await BlogRepository.GetAllPostsAsync();
+
+        groupedPosts = posts
+            .GroupBy(post => post.PublishedOn.Year)
+            .OrderByDescending(group => group.Key)
+            .ToDictionary(
+                year => year.Key,
+                year => (Dictionary<string, Dictionary<int, List<BlogPost>>>)year
+                    .GroupBy(post => post.PublishedOn.ToString("MMMM"))
+                    .OrderByDescending(group => group.Max(post => post.PublishedOn.Month))
+                    .ToDictionary(
+                        month => month.Key,
+                        month => (Dictionary<int, List<BlogPost>>)month
+                            .GroupBy(post => post.PublishedOn.Day)
+                            .OrderByDescending(group => group.Key)
+                            .ToDictionary(
+                                day => day.Key,
+                                day => day.OrderBy(post => post.Title).ToList())));
+
+        isLoading = false;
+    }
+
+    private async Task HandlePostSelected()
+    {
+        await PostSelected.InvokeAsync();
+    }
+}

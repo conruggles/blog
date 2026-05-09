@@ -1,0 +1,93 @@
+﻿@page "/{Year:int}/{Month:int}/{Day:int}/{Slug}.html"
+@inject BlogRepository BlogRepository
+@inject HttpClient Http
+@using System.Text.RegularExpressions
+
+<PageTitle>@PageTitleText</PageTitle>
+
+@if (isNotFound)
+{
+	<section class="post-shell">
+		<div class="post-content card shadow-sm border-0">
+			<div class="card-body p-4 p-md-5">
+				<h1 class="display-6 mb-3">Post Not Found</h1>
+				<p class="lead mb-0">The requested post does not exist in this archive.</p>
+			</div>
+		</div>
+	</section>
+}
+else if (selectedPost is null)
+{
+	<section class="post-shell">
+		<div class="post-content card shadow-sm border-0">
+			<div class="card-body p-4 p-md-5">
+				<h1 class="display-6 mb-3">No Posts Yet</h1>
+				<p class="lead mb-0">Add an HTML post file under wwwroot/content/YYYY/M/D to get started.</p>
+			</div>
+		</div>
+	</section>
+}
+else
+{
+	<section class="post-shell">
+		<article class="post-content card shadow-sm border-0">
+			<div class="card-body p-4 p-md-5">
+				<header class="mb-4">
+					<p class="post-date mb-1">@selectedPost.PublishedOn.ToString("MMMM d, yyyy")</p>
+					<h1 class="post-title mb-0">@selectedPost.Title</h1>
+				</header>
+
+				<div class="post-body">
+					@((MarkupString)postHtml)
+				</div>
+			</div>
+		</article>
+	</section>
+}
+
+@code {
+	[Parameter] public int? Year { get; set; }
+	[Parameter] public int? Month { get; set; }
+	[Parameter] public int? Day { get; set; }
+	[Parameter] public string? Slug { get; set; }
+
+	private static readonly Regex FirstH1Regex = new(
+		@"<h1\b[^>]*>.*?</h1>",
+		RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+	private BlogPost? selectedPost;
+	private string postHtml = string.Empty;
+	private bool isNotFound;
+	private string PageTitleText => selectedPost is null ? "Connor's Blog" : $"{selectedPost.Title} | Connor's Blog";
+
+	protected override async Task OnParametersSetAsync()
+	{
+		isNotFound = false;
+
+		if (Year.HasValue && Month.HasValue && Day.HasValue && !string.IsNullOrWhiteSpace(Slug))
+		{
+			selectedPost = await BlogRepository.FindAsync(Year.Value, Month.Value, Day.Value, Slug);
+			if (selectedPost is null)
+			{
+				isNotFound = true;
+				postHtml = string.Empty;
+				return;
+			}
+		}
+		else
+		{
+			isNotFound = true;
+			postHtml = string.Empty;
+			return;
+		}
+
+		if (selectedPost is null)
+		{
+			postHtml = string.Empty;
+			return;
+		}
+
+		var html = await Http.GetStringAsync(selectedPost.ContentPath);
+		postHtml = FirstH1Regex.Replace(html, string.Empty, 1).Trim();
+	}
+}

@@ -1,0 +1,86 @@
+.menu-shell[b-qptytiirch] {
+    padding: 1.1rem 0.85rem 1.25rem;
+}
+
+.menu-kicker[b-qptytiirch] {
+    color: #d8d0d6;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-size: 0.74rem;
+}
+
+.menu-title[b-qptytiirch] {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+}
+
+.archive-accordion[b-qptytiirch] {
+    --bs-accordion-bg: transparent;
+    --bs-accordion-color: #f3edf0;
+    --bs-accordion-btn-bg: rgba(255, 255, 255, 0.08);
+    --bs-accordion-btn-color: #fff8fc;
+    --bs-accordion-active-bg: rgba(255, 255, 255, 0.2);
+    --bs-accordion-active-color: #ffffff;
+    --bs-accordion-btn-focus-box-shadow: none;
+    --bs-accordion-border-color: rgba(255, 255, 255, 0.14);
+}
+
+.nested-months[b-qptytiirch] {
+    margin-left: 0.2rem;
+}
+
+.day-group[b-qptytiirch] {
+    margin-bottom: 0.7rem;
+}
+
+.day-label[b-qptytiirch] {
+    color: #5f565c;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.72rem;
+}
+
+.post-list[b-qptytiirch] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.post-list li[b-qptytiirch] {
+    margin: 0.2rem 0;
+}
+
+.post-list[b-qptytiirch]  .post-link {
+    display: block;
+    border-radius: 0.4rem;
+    background: transparent;
+    border: 1px solid transparent;
+    color: #766b72 !important;
+    text-decoration: none;
+    padding: 0.35rem 0.45rem;
+    line-height: 1.35;
+    transition: background-color 120ms ease, color 120ms ease;
+}
+
+.post-list[b-qptytiirch]  .post-link:link,
+.post-list[b-qptytiirch]  .post-link:visited {
+    color: #766b72 !important;
+}
+
+.post-list[b-qptytiirch]  .post-link:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #f2ecef !important;
+}
+
+.post-list[b-qptytiirch]  .post-link.active {
+    background: #b8bec6;
+    border-color: #b8bec6;
+    color: #1f2328 !important;
+    font-weight: 600;
+}
+
+.post-list[b-qptytiirch]  .post-link:focus-visible {
+    outline: 2px solid #c7cdd5;
+    outline-offset: 2px;
+}

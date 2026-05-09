@@ -1,0 +1,12 @@
+.post-shell[b-vtn16vhgwh] {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 1.25rem 0;
+}
+
+.post-content[b-vtn16vhgwh] {
+    width: min(100%, 760px);
+    min-height: 220px;
+    background: #fffdfa;
+}

@@ -1,0 +1,194 @@
+/* /Layout/MainLayout.razor.rz.scp.css */
+.page[b-i39aule7gc] {
+    display: flex;
+    min-height: 100vh;
+    background: radial-gradient(circle at 10% 5%, #f7f1e7 0%, #f0e7d8 38%, #ece3d4 100%);
+}
+
+.sidebar[b-i39aule7gc] {
+    background: linear-gradient(180deg, #1f2328 0%, #272d35 65%, #2f343d 100%);
+    color: #f4efef;
+}
+
+.mobile-header[b-i39aule7gc] {
+    background: #1f2328;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+}
+
+.brand[b-i39aule7gc] {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.sidebar-brand[b-i39aule7gc] {
+    padding: 1.2rem 0.95rem 0.65rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-brand a[b-i39aule7gc] {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.main-content[b-i39aule7gc] {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.content-wrap[b-i39aule7gc] {
+    width: 100%;
+    max-width: 980px;
+    padding: 1.1rem 1rem 2.1rem;
+}
+
+@media (max-width: 640.98px) {
+    .sidebar[b-i39aule7gc] {
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .content-wrap[b-i39aule7gc] {
+        padding: 0.5rem 0.75rem 1.5rem;
+    }
+}
+
+@media (min-width: 641px) {
+    .sidebar[b-i39aule7gc] {
+        width: 305px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        overflow-y: auto;
+    }
+}
+/* /Layout/NavMenu.razor.rz.scp.css */
+.menu-shell[b-qptytiirch] {
+    padding: 1.1rem 0.85rem 1.25rem;
+}
+
+.menu-kicker[b-qptytiirch] {
+    color: #b4adb1;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-size: 0.74rem;
+}
+
+.menu-title[b-qptytiirch] {
+    color: #f4f0f0;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+}
+
+.archive-accordion[b-qptytiirch] {
+    --bs-accordion-bg: transparent;
+    --bs-accordion-color: #e9e4e4;
+    --bs-accordion-btn-bg: rgba(255, 255, 255, 0.05);
+    --bs-accordion-btn-color: #f0ecec;
+    --bs-accordion-active-bg: rgba(255, 255, 255, 0.11);
+    --bs-accordion-active-color: #ffffff;
+    --bs-accordion-btn-focus-box-shadow: none;
+    --bs-accordion-border-color: rgba(255, 255, 255, 0.06);
+}
+
+.nested-months[b-qptytiirch] {
+    margin-left: 0.2rem;
+}
+
+.day-group[b-qptytiirch] {
+    margin-bottom: 0.7rem;
+}
+
+.day-label[b-qptytiirch] {
+    color: #c8bec3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.72rem;
+}
+
+.post-list[b-qptytiirch] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.post-list li[b-qptytiirch] {
+    margin: 0.2rem 0;
+}
+
+.post-list[b-qptytiirch]  .post-link {
+    display: block;
+    border-radius: 0.4rem;
+    color: #efe8e8;
+    text-decoration: none;
+    padding: 0.35rem 0.45rem;
+    line-height: 1.35;
+}
+
+.post-list[b-qptytiirch]  .post-link.active,
+.post-list[b-qptytiirch]  .post-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+/* /Pages/Home.razor.rz.scp.css */
+.post-shell[b-5qxmcrigow] {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 1.25rem 0;
+}
+
+.post-content[b-5qxmcrigow] {
+    width: min(100%, 760px);
+    background: #fffdfa;
+}
+
+.post-date[b-5qxmcrigow] {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.77rem;
+    color: #6f6a5f;
+}
+
+.post-title[b-5qxmcrigow] {
+    font-size: clamp(2rem, 2.4vw, 2.8rem);
+    line-height: 1.15;
+    color: #1c1b18;
+}
+
+.post-body[b-5qxmcrigow] {
+    font-size: 1.125rem;
+    line-height: 1.9;
+    color: #22201b;
+}
+
+.post-body :deep(p)[b-5qxmcrigow] {
+    margin-bottom: 1.3rem;
+}
+
+.post-body :deep(code)[b-5qxmcrigow] {
+    color: #7f1d1d;
+    background: #f4eee1;
+    border-radius: 0.25rem;
+    padding: 0.1rem 0.35rem;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 767.98px) {
+    .post-shell[b-5qxmcrigow] {
+        padding: 0.75rem 0;
+    }
+
+    .post-body[b-5qxmcrigow] {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+}

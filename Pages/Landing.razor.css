@@ -1,0 +1,12 @@
+.post-shell {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 1.25rem 0;
+}
+
+.post-content {
+    width: min(100%, 760px);
+    min-height: 220px;
+    background: #fffdfa;
+}
