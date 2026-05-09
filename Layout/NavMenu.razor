@@ -1,4 +1,5 @@
 ﻿@inject BlogRepository BlogRepository
+@inject NavigationManager NavigationManager
 
 <section class="menu-shell">
     <p class="menu-kicker mb-1">Posts</p>
@@ -28,7 +29,7 @@
                                                 @foreach (var post in dayGroup.Value)
                                                 {
                                                     <li>
-                                                        <NavLink href="@post.RoutePath" class="post-link" Match="NavLinkMatch.All" @onclick="HandlePostSelected">
+                                                        <NavLink href="@GetPostHref(post)" class="post-link" Match="NavLinkMatch.All" @onclick="HandlePostSelected">
                                                             @post.Title
                                                         </NavLink>
                                                     </li>
@@ -76,6 +77,12 @@
                                 day => day.OrderBy(post => post.Title).ToList())));
 
         isLoading = false;
+    }
+
+    private string GetPostHref(BlogPost post)
+    {
+        var basePath = new Uri(NavigationManager.BaseUri).AbsolutePath.TrimEnd('/');
+        return basePath + post.RoutePath;
     }
 
     private async Task HandlePostSelected()
