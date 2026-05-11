@@ -6,7 +6,7 @@ A personal blog built with [Blazor WebAssembly](https://learn.microsoft.com/aspn
 
 | Layer | Choice |
 |---|---|
-| Framework | .NET 8 Blazor WebAssembly |
+| Framework | .NET 10 Blazor WebAssembly |
 | UI components | [Blazor.Bootstrap](https://blazorbootstrap.com/) 3.x |
 | CSS | Bootstrap 5 |
 | Hosting | GitHub Pages |
